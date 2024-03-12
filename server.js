@@ -26,7 +26,7 @@ const config = {
   secure: false,
   auth: {
     user: "laksamana.arya1412@gmail.com",
-    pass: process.env.MAIL_PASSWORD,
+    pass: process.env.MAIL_PASSWORD, // 2FA Password APP
   },
 };
 
@@ -46,7 +46,7 @@ app.post("/api/send-email", async (req, res) => {
     const { from, to, subject, text } = req.body;
     const data = { from, to, subject, text };
     const emailResponse = await sendEmailMessages(data);
-    res.respond({ message: "Email sent successfully", email: emailResponse });
+    res.respond({ message: "Email sent successfully", email: data });
   } catch (error) {
     console.error("Error sending email:", error);
     res.failServerError({ message: "Internal server error", error: error });
